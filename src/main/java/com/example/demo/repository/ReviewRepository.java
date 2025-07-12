@@ -13,4 +13,5 @@ public interface ReviewRepository {
 
 	void update(Review review);
 	
+	void delete(Review review);
 }
