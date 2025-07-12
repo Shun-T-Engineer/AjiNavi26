@@ -9,15 +9,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Review;
 import com.example.demo.form.ReviewRemoveForm;
+import com.example.demo.service.RemoveService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class RemoveController {
+	
+	private final RemoveService service;
 	
 	@PostMapping("/remove-review")
 	public String removeReview(@Validated @ModelAttribute ReviewRemoveForm form, 
 													BindingResult result) {
-		
-		System.out.println(form);
 
 		if(result.hasErrors()) {
 			throw new IllegalArgumentException("**removeReview()**");
@@ -42,7 +46,7 @@ public class RemoveController {
 		r.setRating(form.getRating());
 		r.setComment(form.getComment());
 		
-		System.out.println(r);
+		service.remove(r);
 		
 		redirectAttributes.addFlashAttribute("msg","レビュー削除");
 		
