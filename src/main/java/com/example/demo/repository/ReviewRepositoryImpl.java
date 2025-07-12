@@ -90,5 +90,17 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 				review.getReviewId() );
 	}
 
+	@Override
+	public void delete(Review review) {
+		String sql = " DELETE" +
+							 " FROM" +
+							 " t_review" +
+							 " WHERE" +
+							 " review_id = ?";
+		
+		jdbcTemplate.update(sql,review.getReviewId());
+						
+	}
+
 
 }
